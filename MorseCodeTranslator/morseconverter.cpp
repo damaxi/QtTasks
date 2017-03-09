@@ -1,6 +1,7 @@
 #include "morseconverter.h"
 
 #include <QPair>
+#include <QSet>
 #include <QVector>
 
 MorseConverter::MorseConverter()
@@ -78,3 +79,7 @@ const QVector<QPair<QChar, QString>> MorseConverter::MORSE_CODE(
      {'6', "-...."},  {'7', "--..."},  {'8', "---.."},  {'9', "----."},
      {'.', ".-.-.-"}, {',', "--..--"}, {'?', "..--.."}, {'/', "-..-."},
      {'@', ".--.-."}});
+
+const QSet<QChar> MorseConverter::MORSE_VALIDATOR({{QChar::Space},
+                                                   {QChar('.')},
+                                                   {QChar('-')}});

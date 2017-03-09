@@ -5,6 +5,7 @@
 
 template <typename T, typename U> struct QPair;
 template <typename T> class QVector;
+template <class T> class QSet;
 
 class MorseConverter {
 public:
@@ -21,6 +22,7 @@ private:
   const QString m_wordSeparator;
 
   static const QVector<QPair<QChar, QString>> MORSE_CODE;
+  static const QSet<QChar> MORSE_VALIDATOR;
 };
 
 #endif // MORSECONVERTER_H
