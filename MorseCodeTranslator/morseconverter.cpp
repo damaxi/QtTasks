@@ -4,18 +4,30 @@
 #include <QVector>
 
 MorseConverter::MorseConverter()
-    : m_letterSeparator(' '), m_wordSeparator(" ") {}
+    : m_letterSeparator(' '), m_wordSeparator("  ") {}
 
 const QString MorseConverter::code(QString &&text) const {
   QStringList words = text.split(' ', QString::SkipEmptyParts);
   QString result;
+  QString tmp;
   foreach (auto &word, words) {
     for (auto iter = word.begin(); iter != word.end(); ++iter) {
-      result.append(findChar(*iter));
+      if (iter->isLower())
+        tmp = findChar(*iter);
+      else
+        tmp = findChar(iter->toLower());
+
+      if (!tmp.isEmpty()) {
+        result.append(tmp);
+        result.append(QChar::Space);
+      }
+    }
+    if (result.at(result.length() - 1) == QChar::Space)
+      result.append(QChar::Space);
+    else {
+      result.append(QChar::Space);
       result.append(QChar::Space);
     }
-    result.append(QChar::Space);
-    result.append(QChar::Space);
   }
 
   return result;

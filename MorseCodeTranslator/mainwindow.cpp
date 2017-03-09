@@ -9,8 +9,10 @@
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow),
-      m_file(QDir::home().absolutePath()), m_converter() {
+      m_file(QDir::home().absolutePath()), m_converter(),
+      m_comboBoxModel({{tr("Morse -> Letters")}, {tr("Letters -> Morse")}}) {
   ui->setupUi(this);
+  ui->comboBox->addItems(m_comboBoxModel);
 }
 
 MainWindow::~MainWindow() { delete ui; }
@@ -43,6 +45,11 @@ void MainWindow::setFile(QString &file) {
 }
 
 void MainWindow::on_translateButton_clicked() {
-  const QString &translated = m_converter.decode(ui->textEdit->toPlainText());
-  ui->textEdit->setText(translated);
+  if (ui->comboBox->currentText() == m_comboBoxModel.first()) {
+    const QString &translated = m_converter.decode(ui->textEdit->toPlainText());
+    ui->textEdit->setText(translated);
+  } else {
+    const QString &translated = m_converter.code(ui->textEdit->toPlainText());
+    ui->textEdit->setText(translated);
+  }
 }

@@ -4,8 +4,6 @@
 #include "morseconverter.h"
 #include <QMainWindow>
 
-class QString;
-
 namespace Ui {
 class MainWindow;
 }
@@ -31,6 +29,7 @@ private:
   Ui::MainWindow *ui;
   QString m_file;
   MorseConverter m_converter;
+  const QStringList m_comboBoxModel;
 };
 
 #endif // MAINWINDOW_H
