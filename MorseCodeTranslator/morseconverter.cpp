@@ -49,6 +49,14 @@ const QString MorseConverter::decode(QString &&text) const {
   return result;
 }
 
+bool MorseConverter::validate(QString &&text) const {
+  for (auto iter = text.begin(); iter != text.end(); ++iter) {
+    if (MORSE_VALIDATOR.constFind(*iter) == MORSE_VALIDATOR.constEnd())
+      return false;
+  }
+  return true;
+}
+
 const QChar MorseConverter::findCode(const QString &code) const {
   foreach (auto &pair, MORSE_CODE) {
     if (pair.second == code)

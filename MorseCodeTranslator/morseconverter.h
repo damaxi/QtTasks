@@ -13,6 +13,7 @@ public:
 
   const QString code(QString &&text) const;
   const QString decode(QString &&text) const;
+  bool validate(QString &&text) const;
 
 private:
   const QChar findCode(const QString &code) const;

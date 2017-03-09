@@ -4,6 +4,7 @@
 #include <QDir>
 #include <QFile>
 #include <QFileDialog>
+#include <QMessageBox>
 #include <QString>
 #include <QTextStream>
 
@@ -46,7 +47,13 @@ void MainWindow::setFile(QString &file) {
 
 void MainWindow::on_translateButton_clicked() {
   if (ui->comboBox->currentText() == m_comboBoxModel.first()) {
-    const QString &translated = m_converter.decode(ui->textEdit->toPlainText());
+    QString origin = ui->textEdit->toPlainText();
+    if (!m_converter.validate(std::move(origin))) {
+      QMessageBox::warning(this, tr("Morse decoder"),
+                           tr("Your input contains illegal character"));
+      return;
+    }
+    const QString &translated = m_converter.decode(std::move(origin));
     ui->textEdit->setText(translated);
   } else {
     const QString &translated = m_converter.code(ui->textEdit->toPlainText());
