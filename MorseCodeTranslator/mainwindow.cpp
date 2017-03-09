@@ -29,7 +29,7 @@ void MainWindow::on_loadButton_clicked() {
 }
 
 void MainWindow::on_saveButton_clicked() {
-  QString fileName = QFileDialog::getOpenFileName(this, tr("Save File"), m_file,
+  QString fileName = QFileDialog::getSaveFileName(this, tr("Save File"), m_file,
                                                   tr("Text (*.txt)"));
   setFile(fileName);
   QFile outputFile(fileName);
@@ -43,6 +43,14 @@ void MainWindow::setFile(QString &file) {
     return;
 
   m_file = file;
+}
+
+void MainWindow::changeTranslationType()
+{
+  if (ui->comboBox->currentIndex())
+    ui->comboBox->setCurrentIndex(0);
+  else
+    ui->comboBox->setCurrentIndex(1);
 }
 
 void MainWindow::on_translateButton_clicked() {
@@ -59,4 +67,5 @@ void MainWindow::on_translateButton_clicked() {
     const QString &translated = m_converter.code(ui->textEdit->toPlainText());
     ui->textEdit->setText(translated);
   }
+  changeTranslationType();
 }

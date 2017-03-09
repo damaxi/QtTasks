@@ -25,6 +25,7 @@ private slots:
 
 private:
   void setFile(QString &file);
+  void changeTranslationType();
 
   Ui::MainWindow *ui;
   QString m_file;

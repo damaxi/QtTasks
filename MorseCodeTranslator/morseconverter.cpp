@@ -76,7 +76,7 @@ const QString MorseConverter::findChar(const QChar &character) const {
 }
 
 const QVector<QPair<QChar, QString>> MorseConverter::MORSE_CODE(
-    {{'a', ".--"},    {'b', "-..."},   {'c', "-.-."},   {'d', "-.."},
+    {{'a', ".-"},    {'b', "-..."},   {'c', "-.-."},   {'d', "-.."},
      {'e', "."},      {'f', "..-."},   {'g', "--."},    {'h', "...."},
      {'i', ".."},     {'j', ".---"},   {'k', "-.-"},    {'l', ".-.."},
      {'m', "--"},     {'n', "-."},     {'o', "---"},    {'p', ".--."},
