@@ -6,7 +6,7 @@
 MorseConverter::MorseConverter()
     : m_letterSeparator(' '), m_wordSeparator(" ") {}
 
-const QString MorseConverter::code(QString &text) const {
+const QString MorseConverter::code(QString &&text) const {
   QStringList words = text.split(' ', QString::SkipEmptyParts);
   QString result;
   foreach (auto &word, words) {
@@ -21,7 +21,7 @@ const QString MorseConverter::code(QString &text) const {
   return result;
 }
 
-const QString MorseConverter::decode(QString &text) const {
+const QString MorseConverter::decode(QString &&text) const {
   QStringList words = text.split(m_wordSeparator, QString::SkipEmptyParts);
   QStringList letters;
   QString result;

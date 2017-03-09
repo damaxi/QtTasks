@@ -9,7 +9,7 @@
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow),
-      m_file(QDir::home().absolutePath()) {
+      m_file(QDir::home().absolutePath()), m_converter() {
   ui->setupUi(this);
 }
 
@@ -40,4 +40,9 @@ void MainWindow::setFile(QString &file) {
     return;
 
   m_file = file;
+}
+
+void MainWindow::on_translateButton_clicked() {
+  const QString &translated = m_converter.decode(ui->textEdit->toPlainText());
+  ui->textEdit->setText(translated);
 }
