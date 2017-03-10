@@ -4,6 +4,11 @@ import QtQuick.Layouts 1.1
 
 Rectangle {
     id: cell
+    function reset() {
+        mouseArea.enabled = true
+        state = "default"
+        sign.source = ""
+    }
     property int orderNumber: modelData
     z: -1
     border { width: borderWidth; color: styledBorder }
@@ -48,9 +53,16 @@ Rectangle {
             }
         }
         onClicked: {
-            sign.source = "qrc:/components/CrossSign.qml"
+            if (engine.player == "crosses")
+                sign.source = "qrc:/components/CrossSign.qml"
+            else
+                sign.source = "qrc:/components/NoughtSign.qml"
             enabled = false
             cell.state = "default"
+
+            if (engine.isFinished(cell.orderNumber)) {
+                endGame()
+            }
         }
     }
 }

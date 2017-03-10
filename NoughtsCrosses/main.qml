@@ -13,6 +13,11 @@ ApplicationWindow {
     title: qsTr("Noughts and Crosses")
     property alias styledBorder: style.border
     property alias borderWidth: style.borderWidth
+    property int crossesWins: 0
+    property int noughtsWins: 0
+    function endGame() {
+        popup.open()
+    }
 
     background: Image {
         id: paperBackground
@@ -34,9 +39,10 @@ ApplicationWindow {
 
             Custom.ResultsLabel {
                 text: qsTr("Turn:")
+                Layout.leftMargin: 20
             }
             Custom.ResultsLabel {
-                text: qsTr("blue")
+                text: qsTr("%1").arg(engine.player)
             }
             Custom.ResultsLabel {
                 Layout.fillWidth: true
@@ -45,12 +51,14 @@ ApplicationWindow {
                 text: qsTr("Score:")
             }
             Custom.ResultsLabel {
-                text: "0"
+                text: "%1".arg(crossesWins)
                 color: "red"
+                Layout.margins: 5
             }
             Custom.ResultsLabel {
-                text: "0"
+                text: "%1".arg(noughtsWins)
                 color: "blue"
+                Layout.rightMargin: 20
             }
         }
         Pane {
@@ -72,9 +80,29 @@ ApplicationWindow {
             Layout.fillWidth: true
             Layout.fillHeight: true
             Repeater {
-                model: 9
+                id: grid
+                function redraw() {
+                    for (var i = 0; i < model; ++i) {
+                        itemAt(i).reset()
+                    }
+                }
+
+                model: engine.maxSize()
                 Custom.Cell {}
             }
+        }
+    }
+
+    Custom.EndGamePopup {
+        id: popup
+        onClosed: {
+            grid.redraw()
+            if (engine.player == "crosses")
+                ++crossesWins
+            else
+                ++noughtsWins
+
+            engine.reset()
         }
     }
 }

@@ -7,5 +7,8 @@
         <file>components/CrossSign.qml</file>
         <file>components/NoughtSign.qml</file>
         <file>components/Cell.qml</file>
+        <file>components/EndGamePopup.qml</file>
+        <file>components/ResultsButton.qml</file>
+        <file>components/CustomFont.qml</file>
     </qresource>
 </RCC>
