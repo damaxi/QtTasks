@@ -60,9 +60,13 @@ Rectangle {
             enabled = false
             cell.state = "default"
 
-            if (engine.isFinished(cell.orderNumber)) {
+            if (engine.isWon(cell.orderNumber)) {
                 endGame()
+                return
             }
+
+            if (engine.isDraw())
+                drawGame()
         }
     }
 }

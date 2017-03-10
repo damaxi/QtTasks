@@ -4,6 +4,7 @@ import QtQuick.Layouts 1.1
 
 Popup {
     id: resultPopup
+    property alias resultLabelState: resultLabel.state
     width: parent.width / 2
     height:  parent.height / 4
     x: window.width / 4
@@ -21,8 +22,18 @@ Popup {
         anchors.fill: parent
 
         ResultsLabel {
+            id: resultLabel
             text: qsTr("%1 wins!").arg(engine.player)
             Layout.alignment: Qt.AlignHCenter
+            states: [
+                State {
+                    name: "draw"
+                    PropertyChanges {
+                        target: resultLabel
+                        text: qsTr("Draw!")
+                    }
+                }
+            ]
         }
 
         ResultsButton {

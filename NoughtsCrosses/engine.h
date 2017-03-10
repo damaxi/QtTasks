@@ -14,8 +14,9 @@ public:
 
   QString player() const;
   Q_INVOKABLE int maxSize() const;
-  Q_INVOKABLE bool isFinished(uint cell);
+  Q_INVOKABLE bool isWon(uint cell);
   Q_INVOKABLE void reset();
+  Q_INVOKABLE bool isDraw() const;
 
 signals:
   void playerChanged();
@@ -29,7 +30,7 @@ private:
 
   QString m_player;
   const int m_maxSize;
-  std::array<int, 9> cellArray;
+  std::array<int, 9> m_cellArray;
   static const QStringList PLAYERS;
 };
 

@@ -15,6 +15,11 @@ ApplicationWindow {
     property alias borderWidth: style.borderWidth
     property int crossesWins: 0
     property int noughtsWins: 0
+    function drawGame() {
+        popup.resultLabelState = "draw"
+        endGame()
+    }
+
     function endGame() {
         popup.open()
     }
@@ -97,11 +102,12 @@ ApplicationWindow {
         id: popup
         onClosed: {
             grid.redraw()
-            if (engine.player == "crosses")
+            if (engine.player == "crosses" && resultLabelState == "default")
                 ++crossesWins
-            else
+            else if (resultLabelState == "default")
                 ++noughtsWins
 
+            resultLabelState = "default"
             engine.reset()
         }
     }
