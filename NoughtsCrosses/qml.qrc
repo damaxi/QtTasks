@@ -2,5 +2,10 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>img/paper.png</file>
+        <file>fonts/Griffy-Regular.ttf</file>
+        <file>components/ResultsLabel.qml</file>
+        <file>components/CrossSign.qml</file>
+        <file>components/NoughtSign.qml</file>
+        <file>components/Cell.qml</file>
     </qresource>
 </RCC>
