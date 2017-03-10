@@ -102,12 +102,12 @@ ApplicationWindow {
         id: popup
         onClosed: {
             grid.redraw()
-            if (engine.player == "crosses" && resultLabelState == "default")
+            if (engine.player == "crosses" && resultLabelState == "")
                 ++crossesWins
-            else if (resultLabelState == "default")
+            else if (resultLabelState == "")
                 ++noughtsWins
 
-            resultLabelState = "default"
+            resultLabelState = ""
             engine.reset()
         }
     }
